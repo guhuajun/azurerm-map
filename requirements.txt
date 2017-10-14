@@ -1,0 +1,13 @@
+django
+django-extensions
+djangorestframework
+django-cors-headers
+
+pylint
+pylint-django
+autopep8
+
+markdown
+pygments
+
+ipython
