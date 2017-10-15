@@ -10,17 +10,6 @@ class CmdletSerilaizer(serializers.ModelSerializer):
     Cmdlet Serializer
     '''
 
-    verb = serializers.SerializerMethodField()
-    noun = serializers.SerializerMethodField()
-
-    def get_verb(self, obj):
-        if not obj.verb:
-            return obj.name.split('-')[0]
-
-    def get_noun(self, obj):
-        if not obj.noun:
-            return obj.name.split('-')[0]
-
     class Meta:
         model = models.Cmdlet
         fields = '__all__'

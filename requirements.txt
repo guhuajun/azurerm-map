@@ -1,6 +1,8 @@
 django
 django-extensions
 djangorestframework
+django-filter
+django-crispy-forms
 django-cors-headers
 
 pylint

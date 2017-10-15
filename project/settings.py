@@ -40,13 +40,17 @@ INSTALLED_APPS = [
 
     # 3rd party apps
     'django_extensions',
+    'corsheaders',
     'rest_framework',
+    'crispy_forms',
+    'django_filters',
 
     # local apps
     'backend',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -61,7 +65,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['frontend'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,8 +126,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend/dist')
+]
+
+CORS_ORIGIN_ALLOW_ALL = True
+
 
 REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 20
+    'PAGE_SIZE': 15
 }
