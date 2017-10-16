@@ -13,3 +13,4 @@ src/config/*.tmp
 src/config/env.js
 npm-debug.log
 .vscode/*
+frontend/src/libs/draw2d.js

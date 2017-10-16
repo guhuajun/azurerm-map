@@ -8,7 +8,6 @@
 .layout-logo {
     color: #f5f7f9;
     font-size: 2vw;
-    padding: 2px;
 }
 
 .layout-breadcrumb {
@@ -95,7 +94,7 @@
             <div class="layout-content">
                 <div class="layout-content-main">
                     <Row>
-                        <Table stripe :columns="columns1" :data="data1"></Table>
+                        
                     </Row>
                 </div>
             </div>
@@ -112,26 +111,7 @@ export default {
         return {
             spanLeft: 4,
             spanRight: 20,
-            columns1: [
-                {
-                    title: 'Name',
-                    key: 'name',
-                    sortable: true
-                },
-                {
-                    title: 'Verb',
-                    key: 'verb',
-                    sortable: true
-                },
-                {
-                    title: 'Noun',
-                    key: 'noun',
-                    sortable: true
-                }
-            ],
-            data1: [],
-            menuTheme: 'dark',
-            menuItems: []
+            menuTheme: 'dark'
         }
     },
     computed: {
@@ -140,8 +120,7 @@ export default {
         }
     },
     mounted: function() {
-        this.loadCmdlet()
-        this.loadTree()
+
     },
     methods: {
         toggleClick() {
@@ -152,23 +131,6 @@ export default {
                 this.spanLeft = 4;
                 this.spanRight = 20;
             }
-        },
-        loadCmdlet() {
-            // https://github.com/vqlai/vqlai.github.io/blob/master/src/App.vue
-            const _this = this;
-            this.$util.ajax.get('api/cmdlet').then(
-                function(response) {
-                    _this.data1 = response.data.results
-                }
-            )
-        },
-        loadTree() {
-            const _this = this;
-            this.$util.ajax.get('api/cmdlet/noun').then(
-                function(response) {
-                    _this.menuItems = response.data
-                }
-            )
         }
     }
 }
