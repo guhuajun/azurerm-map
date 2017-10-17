@@ -94,7 +94,9 @@
             <div class="layout-content">
                 <div class="layout-content-main">
                     <Row>
-                        
+                        <Select v-model="selectedParam" style="width:200px" filterable>
+                            <Option v-for="item in paramList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                        </Select>
                     </Row>
                 </div>
             </div>
@@ -111,7 +113,9 @@ export default {
         return {
             spanLeft: 4,
             spanRight: 20,
-            menuTheme: 'dark'
+            menuTheme: 'dark',
+            selectedParam: null,
+            paramList: []
         }
     },
     computed: {
@@ -120,7 +124,7 @@ export default {
         }
     },
     mounted: function() {
-
+        this.loadParams();
     },
     methods: {
         toggleClick() {
@@ -131,6 +135,18 @@ export default {
                 this.spanLeft = 4;
                 this.spanRight = 20;
             }
+        },
+        loadParams() {
+            const _this = this;
+            this.$util.ajax.get('api/cmdletparameter/parameter').then(
+                function(response) {
+                    var data = []
+                    response.data.forEach(function(element) {
+                        data.push({"value": element, "label": element})
+                    }, this);
+                    _this.paramList = data
+                }
+            )            
         }
     }
 }

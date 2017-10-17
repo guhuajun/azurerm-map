@@ -42,7 +42,19 @@ class CmdletParameterViewSet(ModelViewSet):
 
     queryset = models.CmdletParameter.objects.all()
     serializer_class = serializers.CmdletParameterSerializer
+    filter_fields = ('name', 'parameter', 'parameter_type')
 
+    @list_route()
+    def parameter(self, *args):
+        data = [x.parameter for x in self.queryset.all()]
+        data = sorted(list(set(data)))
+        return Response(data=data)
+    
+    @list_route()
+    def parametertype(self, *args):
+        data = [x.parameter_type for x in self.queryset.all()]
+        data = sorted(list(set(data)))
+        return Response(data=data)
 
 class CmdletOutputTypeViewSet(ModelViewSet):
     '''
@@ -51,3 +63,10 @@ class CmdletOutputTypeViewSet(ModelViewSet):
 
     queryset = models.CmdletOutputType.objects.all()
     serializer_class = serializers.CmdletOutputTypeSerilaizer
+    filter_fields = ('name', 'output_type')
+
+    @list_route()
+    def outputtype(self, *args):
+        data = [x.output_type for x in self.queryset.all()]
+        data = sorted(list(set(data)))
+        return Response(data=data)
