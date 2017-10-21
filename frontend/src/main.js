@@ -4,10 +4,11 @@ import VueRouter from 'vue-router';
 import Routers from './router';
 import Vuex from 'vuex';
 import Util from './libs/util';
-// import draw2d from './libs/draw2d';
 import App from './app.vue';
 import 'iview/dist/styles/iview.css';
-
+import IEcharts from 'vue-echarts-v3/src/full.vue';
+import 'echarts/lib/chart/bar';
+import 'echarts/lib/component/title';
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
