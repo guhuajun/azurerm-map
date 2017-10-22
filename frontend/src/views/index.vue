@@ -71,12 +71,10 @@
             <Menu :theme="menuTheme" width="auto">
                 <Submenu name="1">
                     <template slot="title">
-                        <Icon type="ios-paper"></Icon>
-                        内容管理
+                        <Icon type="ios-pricetags"></Icon>
+                        Alaphbets
                     </template>
-                    <MenuItem name="1-1">文章管理</MenuItem>
-                    <MenuItem name="1-2">评论管理</MenuItem>
-                    <MenuItem name="1-3">举报管理</MenuItem>
+                    <MenuItem :name="alphabet" :key="alphabet" v-for="alphabet in alphabets">{{ alphabet }}</MenuItem>
                 </Submenu>
             </Menu>
             </Col>
@@ -112,6 +110,14 @@ export default {
         return {
             spanLeft: 4,
             spanRight: 20,
+            alphabet: '',
+            alphabets: [
+                'A', 'B', 'C', 'D', 'E', 'F',
+                'G', 'H', 'I', 'J', 'K', 'L',
+                'M', 'N', 'O', 'P', 'Q', 'R',
+                'S', 'T', 'U', 'V', 'W', 'X',
+                'Y', 'Z'
+            ],
             columns1: [
                 {
                     title: 'Name',

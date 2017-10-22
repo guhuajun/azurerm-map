@@ -11,6 +11,7 @@ class Cmdlet(models.Model):
     name = models.CharField(max_length=120, unique=True, db_index=True)
     verb = models.CharField(max_length=20, db_index=True, null=True)
     noun = models.CharField(max_length=100, db_index=True, null=True)
+    component = models.CharField(max_length=100, null=True)
     module = models.CharField(max_length=80, db_index=True)
 
     def __str__(self):

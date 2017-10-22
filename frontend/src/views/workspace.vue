@@ -103,124 +103,57 @@ export default {
   components: {
     IEcharts
   },
-  data: () => ({
-    spanLeft: 4,
-    spanRight: 20,
-    menuTheme: "dark",
-    menuItems: [],
-    graph: {
-      title: {
-        text: "Graph 简单示例"
-      },
-      tooltip: {},
-      animationDurationUpdate: 1500,
-      animationEasingUpdate: "quinticInOut",
-      series: [
-        {
-          type: "graph",
-          layout: "none",
-          symbolSize: 50,
-          roam: true,
-          label: {
-            normal: {
-              show: true
-            }
+  data() {
+    return {
+        spanLeft: 4,
+        spanRight: 20,
+        menuTheme: "dark",
+        menuItems: [],
+        graph: {
+          title: {
+            text: "Les Miserables",
+            subtext: "Default layout",
+            top: "bottom",
+            left: "right"
           },
-          edgeSymbol: ["circle", "arrow"],
-          edgeSymbolSize: [4, 10],
-          edgeLabel: {
-            normal: {
-              textStyle: {
-                fontSize: 20
-              }
-            }
-          },
-          data: [
+          tooltip: {},
+          legend: [],
+          animationDuration: 1500,
+          animationEasingUpdate: "quinticInOut",
+          series: [
             {
-              name: "节点1",
-              x: 300,
-              y: 300
-            },
-            {
-              name: "节点2",
-              x: 800,
-              y: 300
-            },
-            {
-              name: "节点3",
-              x: 550,
-              y: 100
-            },
-            {
-              name: "节点4",
-              x: 550,
-              y: 500
-            }
-          ],
-          // links: [],
-          links: [
-            {
-              source: 0,
-              target: 1,
-              symbolSize: [5, 20],
+              name: "Les Miserables",
+              type: "graph",
+              layout: "none",
+              data: [],
+              links: [],
+              categories: [],
+              roam: true,
               label: {
                 normal: {
-                  show: true
+                  position: "right",
+                  formatter: "{b}"
                 }
               },
               lineStyle: {
                 normal: {
-                  width: 5,
-                  curveness: 0.2
+                  color: "source",
+                  curveness: 0.3
                 }
               }
-            },
-            {
-              source: "节点2",
-              target: "节点1",
-              label: {
-                normal: {
-                  show: true
-                }
-              },
-              lineStyle: {
-                normal: { curveness: 0.2 }
-              }
-            },
-            {
-              source: "节点1",
-              target: "节点3"
-            },
-            {
-              source: "节点2",
-              target: "节点3"
-            },
-            {
-              source: "节点2",
-              target: "节点4"
-            },
-            {
-              source: "节点1",
-              target: "节点4"
             }
-          ],
-          lineStyle: {
-            normal: {
-              opacity: 0.9,
-              width: 2,
-              curveness: 0
-            }
-          }
+          ]
         }
-      ]
     }
-  }),
+  },
   computed: {
     iconSize() {
       return this.spanLeft === 4 ? 20 : 24;
     }
   },
-  mounted: function() {},
+  mounted: function() {
+    this.loadNodeData();
+  },
   methods: {
     toggleClick() {
       if (this.spanLeft === 4) {
@@ -230,6 +163,16 @@ export default {
         this.spanLeft = 4;
         this.spanRight = 20;
       }
+    },
+    loadNodeData() {
+      // https://github.com/vqlai/vqlai.github.io/blob/master/src/App.vue
+      const _this = this;
+      this.$util.ajax
+        .get("api/cmdlet/component?search=a")
+        .then(function(response) {
+          _this.graph.series[0].data = response.data.results;
+          _this.graph.series[0].links = [{source: "ADAppCredential", target: "ADApplication"}]
+        });
     }
   }
 };

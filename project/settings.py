@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     # 3rd party apps
     'django_extensions',
     'corsheaders',
-    'rest_framework',
     'crispy_forms',
+    'rest_framework',
     'django_filters',
 
     # local apps
